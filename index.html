@@ -5,8 +5,7 @@
     <!-- 基础信息 -->
     <meta charset="utf-8">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
-    <!-- 强制 HTTPS，若不需要可删除，但可能出现问题
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"-->
+    <!-- 强制 HTTPS，若不需要可删除，但可能出现问题 -->
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="force-rendering" content="webkit" />
@@ -36,11 +35,6 @@
     <script type="text/javascript"
         src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-y/izitoast/1.4.0/js/iziToast.min.js">
     </script>
-    <!-- Search Box -->
-    <!--
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    -->
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <!-- Aplayer -->
@@ -56,6 +50,8 @@
     </script>
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json">
+    <!-- 51.LA 统计 -->
+    <script src="./js/51LA.js"></script>
     <script type="text/javascript">
         function runtime() {
             var start = new Date("08/24/2020 15:42:44"); // 修改日期格式为MM/DD/YYYY
@@ -87,87 +83,22 @@
                 <div class="inner three"></div>
             </div>
             <div class="loading-word">
-                <p class="loading-title" id="loading-title">kennyZ | Index</p>
-                <span id="loading-text">Loading......</span>
+                <p class="loading-title" id="loading-title">kennyZ | MyIndex</p>
+                <span id="loading-text">加载中</span>
             </div>
         </div>
     </div>
     <section id="section" class="section">
         <!-- 背景图片 -->
-        <style type="text/css">
-            body{
-              background: url("img/background3.jpg") no-repeat center center fixed;
-                          /*兼容浏览器版本*/
-                          -webkit-background-size: cover;
-                          -o-background-size: cover;                
-                          background-size: cover;
-            } /*背景图*/
-       
-            .test {
-              margin-top: 100px;
-            }
-          </style>
+        <div class="bg-all">
+            <img id="bg" onerror="this.classList.add('error');"></img>
+            <div class="cover"></div>
+        </div>
         <!-- 鼠标指针 -->
         <div id="g-pointer-1"></div>
         <div id="g-pointer-2"></div>
         <!-- 主体内容 -->
         <main id="main" class="main">
-            <!-- 搜索框 -->
-            <div class="close-btn">
-                <span class="fas fa-times"></span>
-            </div>
-            <div class="search-btn">
-                <span class="fas fa-search"></span>
-            </div>
-            <div class="search-data">
-                <input type="text" id="inp" required/>
-                <div class="line"></div>
-                <label>Type to search...</label>
-                <span class="fas fa-search" id="btn"></span>
-            </div>
-
-            <script>
-                var oInp = document.getElementById('inp');
-                var oBtn = document.getElementById('btn');
-            
-                oBtn.onclick = function () {
-                    Search();
-                }
-            
-                document.onkeydown = function () {
-                    if (event.keyCode == 13) {
-                        Search();
-                    }
-                }
-            
-                function Search() {
-                    var url = 'https://cn.bing.com/search?q=' + oInp.value;
-                    window.open(url,'_self');
-                }
-            </script>
-
-            <script>
-                $(".search-btn").click(function(){
-                    $(this).css("display","none");
-                    $(".search-data").fadeIn(500);
-                    $(".close-btn").fadeIn(500);
-                    $(".search-data .line").addClass("active");
-                    setTimeout(function(){
-                        $("input").focus();
-                        $(".search-data label").fadeIn(500);
-                        $(".search-data span").fadeIn(500);
-                    }, 800);
-                });
-                $(".close-btn").click(function(){
-                    $(".search-btn").fadeIn(800);
-                    $(".search-data").fadeOut(500);
-                    $(".close-btn").fadeOut(500);
-                    $(".search-data .line").removeClass("active");
-                    $("input").val("");
-                    $(".search-data label").fadeOut(500);
-                    $(".search-data span").fadeOut(500);
-                });
-            </script>
             <div class="container" id="container">
                 <div class="row" id="row">
                     <div class="col left">
@@ -175,10 +106,10 @@
                         <div class="main-left">
                             <!--Logo-->
                             <div class="main-img">
-                                <img id="logo-img" src="./img/icon/b_dcef4528cbdf6848de70205b85a6456a.jpg" alt="img">
+                                <img id="logo-img" src="./img/icon/b_dcef4528cbdf6848de70205b85a6456a.png" alt="img">
                                 <div class="img-title">
-                                    <span class="img-title-big" id="logo-text-1">kennyZ</span>
-                                    <span class="img-text" id="logo-text-2">.top</span>
+                                    <span class="img-title-big" id="logo-text-1">kennyz</span>
+                                    <span class="img-text" id="logo-text-2">.cn</span>
                                 </div>
                             </div>
                             <!--介绍信息-->
@@ -276,11 +207,11 @@
                                                 class="weekday">星期一</span><br><span class="time-text">00:00:00</span>
                                         </div>
                                         <div class="weather">
-                                            <span id="city_text"> </span>&nbsp;
-                                            <span id="wea_text"> </span>&nbsp;
-                                            <span id="tem_text"> </span>
-                                            <span id="win_text"> </span>
-                                            <span id="win_speed"> </span>
+                                            <span id="city_text">天气</span>&nbsp;
+                                            <span id="wea_text">加载失败</span>&nbsp;
+                                            <span id="tem_text"></span>
+                                            <span id="win_text">次数</span>
+                                            <span id="win_speed">超限</span>
                                         </div>
                                     </div>
                                 </div>
@@ -295,9 +226,9 @@
                                 <!--第一组-->
                                 <div class="row">
                                     <div class="col">
-                                        <a id="link-url-1" href="UnlockMusic/index.html" target="_blank">
+                                        <a id="link-url-1" href="http://kennyz.cn:11444/ts.html" target="_blank">
                                             <div class="link-card cards">
-                                                <i id="link-icon-1" class="fa-solid fa-music"></i>
+                                                <i id="link-icon-1" class="fa-solid fa-blog"></i>
                                                 <span class="link-name" id="link-name-1">音乐解锁</span>
                                             </div>
                                         </a>
@@ -313,7 +244,7 @@
                                     <div class="col">
                                         <a id="link-url-3" href="http://kennyz.cn:32200/" target="_blank">
                                             <div class="link-card cards">
-                                                <i id="link-icon-4" class="fa-solid fa-compass"></i>
+                                                <i id="link-icon-3" class="fa-solid fa-music"></i>
                                                 <span class="link-name" id="link-name-3">在线换肤</span>
                                             </div>
                                         </a>
@@ -324,7 +255,7 @@
                                     <div class="col">
                                         <a id="link-url-4" href="I2B/index.html" target="_blank">
                                             <div class="link-card cards">
-                                                <i id="link-icon-3" class="fa-solid fa-blog"></i>
+                                                <i id="link-icon-4" class="fa-solid fa-compass"></i>
                                                 <span class="link-name" id="link-name-4">点阵图转换</span>
                                             </div>
                                         </a>
@@ -401,39 +332,39 @@
                     <!--网站链接-->
                     <div class="row">
                         <div class="col">
-                            <a href="https://www.cupfox.app/" target="_blank">
+                            <a href="https://yuanbao.tencent.com/" target="_blank">
                                 <div class="link-card cards">
-                                    <span class="link-name">CupFox</span>
+                                    <span class="link-name">腾讯元宝</span>
                                 </div>
                             </a>
                         </div>
                         <div class="col 2">
-                            <a href="https://tool.oschina.net/highlight" target="_blank">
+                            <a href="https://github.com/" target="_blank">
                                 <div class="link-card cards">
-                                    <span class="link-name">Code高亮</span>
+                                    <span class="link-name">Github</span>
                                 </div>
                             </a>
                         </div>
                         <div class="col">
-                            <a href="https://auth.bupt.edu.cn/" target="_blank">
+                            <a href="http://kennyz.cn:11445/" target="_blank">
                                 <div class="link-card cards">
-                                    <span class="link-name">云平台</span>
+                                    <span class="link-name">TS3点歌</span>
                                 </div>
                             </a>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 1.5rem;">
                         <div class="col">
-                            <a href="https://chat.forefront.ai/" target="_blank">
+                            <a href="https://chatgpt.com/" target="_blank">
                                 <div class="link-card cards">
                                     <span class="link-name">ChatGPT</span>
                                 </div>
                             </a>
                         </div>
                         <div class="col 2">
-                            <a href="https://portals.zhihuishu.com/" target="_blank">
+                            <a href="http://kennyz.cn:27721/" target="_blank">
                                 <div class="link-card cards">
-                                    <span class="link-name">智慧树</span>
+                                    <span class="link-name">文件库</span>
                                 </div>
                             </a>
                         </div>
@@ -456,10 +387,10 @@
                         <!--左侧内容-->
                         <div class="box-left">
                             <div class="img-title">
-                                <span class="img-title-big" id="logo-title-other">kennyZ</span>
-                                <span class="img-text" id="logo-title-other-small">.top</span><br />
-                                <span class="img-text">&nbsp;v&nbsp;1.1</span>
-                                <a href="https://github.com/hsBUPT" target="_blank">
+                                <span class="img-title-big" id="logo-title-other">kennyz</span>
+                                <span class="img-text" id="logo-title-other-small">.cn</span><br />
+                                <span class="img-text">&nbsp;v&nbsp;3.3</span>
+                                <a href="https://github.com/NoSetViolin" target="_blank">
                                     <i class="fa-brands fa-github"></i>
                                 </a>
                             </div>
@@ -516,8 +447,11 @@
                                         aria-labelledby="headingTwo" data-bs-parent="#accordion">
                                         <div class="accordion-body">
                                             <div class="upnote">
-						<span class="uptext">
-                                                    <i class="fa-solid fa-circle-plus"></i>&nbsp;2024/11/7 测试版个人主页
+                                                <span class="uptext">
+                                                    <i class="fa-solid fa-circle-plus"></i>&nbsp;2025/02/25 公测版个人主页
+                                                </span>
+                                                <span class="uptext">
+                                                    <i class="fa-solid fa-circle-plus"></i>&nbsp;2024/11/07 测试版个人主页
                                                 </span>
                                             </div>
                                         </div>
@@ -537,12 +471,12 @@
         </main>
         <!-- 版权信息 -->
         <footer id="footer" class="fixed-bottom footer">
-            <div class="power">Copyright&nbsp;©&nbsp;<span id="power-year">2020</span>
-                <script>
-                    document.write(' - ' + (new Date()).getFullYear())
-                </script>&nbsp;<a href="https://space.bilibili.com/1252667569" id="power-text">kennyZ | FreezeThunder</a>&nbsp;&nbsp;<span id="runtime_span"></span>
-
-            </div>
+            <div class="power">Copyright&nbsp;©&nbsp;<span id="power-year">2020 -</span>
+                    <script>
+                        document.write((new Date()).getFullYear());
+                    </script>
+                    <a href="https://space.bilibili.com/1252667569" id="power-text">kennyZ | FreezeThunder</a>&nbsp;&nbsp;<span id="runtime_span"></span>
+                </span>
             <!-- 歌词显示 -->
             <div id="lrc"></div>
         </footer>

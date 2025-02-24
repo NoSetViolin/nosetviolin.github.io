@@ -53,22 +53,16 @@ a:hover {
 }
 
 .cards {
-    backdrop-filter: blur(10px) !important;
     transition: 0.5s;
-    background: rgba(255, 255, 255, 0.3);
 }
 
 .cards:hover {
     transform: scale(1.01);
-    backdrop-filter: blur(10px) !important;
-    background: rgba(255, 255, 255, 0.3);
     transition: 0.5s;
 }
 
 .cards:active {
     transform: scale(0.95);
-    backdrop-filter: blur(10px) !important;
-    background: rgba(255, 255, 255, 0.3);
     transition: 0.5s;
 }
 
@@ -77,114 +71,6 @@ a:hover {
     font-size: 0.95rem;
     text-align: center;
     margin: 14px 0px;
-}
-
-/*搜索框样式*/
-.search-data{
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.search-btn{
-    z-index: 99;
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    height: 60px;
-    width: 60px;
-    line-height: 60px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 50%;
-    background: linear-gradient(-135deg, #c850c0, #4158d0);
-}
-
-.search-btn span{
-    z-index: 99;
-    color: #fff;
-    font-size: 22px;
-    line-height: 60px;
-}
-
-.search-data{
-    z-index: 99;
-    position: absolute;
-    height: 50px;
-    width: 400px;
-    display: flex;
-    text-align: center;
-    /*display: none;*/
-}
-
-.search-data input{
-    z-index: 99;
-    height: 100%;
-    width: 100%;
-    background: none;
-    border: none;
-    outline: none;
-    font-size: 22px;
-    font-weight: 500;
-    color: #fff;
-}
-
-.search-data .line{
-    z-index: 99;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background: #fff;
-    bottom: -10px;
-    transform: scaleX(0);
-    transition: transform 0.4s 0.3s linear;
-}
-
-.search-data .line.active{
-    transform: scaleX(1);
-}
-
-.search-data label{
-    z-index: 99;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    font-size: 20px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: rgba(255,255,255,0.7);
-}
-
-.search-data input:valid ~ label{
-    opacity: 0;
-}
-
-.search-data span{
-    z-index: 99;
-    color: #fff;
-    position: absolute;
-    width: 50px;
-    font-size: 25px;
-    right: 0;
-    top: 0;
-    line-height: 45px;
-    cursor: pointer;
-}
-
-.close-btn{
-    position: absolute;
-    z-index: 99;
-    right: 25px;
-    top: 25px;
-    font-size: 25px;
-    color: #fff;
-    cursor: pointer;
-}
-
-.search-data, .search-data span,
-.search-data label, .close-btn{
-    display: none;
 }
 
 /*鼠标样式*/
@@ -226,7 +112,7 @@ a:hover {
     height: 100%;
     object-fit: cover;
     transition: opacity 1s, transform .25s, filter .25s;
-/*backface-visibility: hidden;*/
+    backface-visibility: hidden;
 }
 
 img.error {
@@ -314,7 +200,7 @@ main {
 }
 
 .img-title-big {
-    font-size: 3rem;
+    font-size: 5rem;
     font-family: 'Pacifico-Regular' !important;
 }
 
@@ -325,8 +211,8 @@ span.img-text {
 
 /*简介*/
 .message {
-    backdrop-filter: blur(10px);
     background: rgb(0 0 0 / 25%);
+    backdrop-filter: blur(10px);
     /*margin: 0.5rem;*/
     padding: 1rem;
     border-radius: 6px;
@@ -449,7 +335,7 @@ span#change {
 
 .music {
     width: 100%;
-    background: rgba(0 0 0 / 25%);
+    background: rgb(0 0 0 / 25%);
     backdrop-filter: blur(10px);
     padding: 20px;
     border-radius: 6px;
@@ -675,13 +561,11 @@ i.iconfont.icon-link {
 
 .link-card i {
     margin-left: 0px;
-    backdrop-filter: blur(10px);
     font-size: 1.65rem;
 }
 
 .link-card:hover {
     background: rgb(0 0 0 / 40%);
-    backdrop-filter: blur(10px);
     transition: 0.5s;
 }
 
@@ -691,7 +575,6 @@ span.link-name {
 
 .link-card:hover span.link-name {
     font-size: 1.15rem;
-    backdrop-filter: blur(10px);
     transition: 0.1s;
 }
 

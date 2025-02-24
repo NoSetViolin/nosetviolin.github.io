@@ -136,73 +136,78 @@ $("#hitokoto").click(function () {
     iziToast.show({
       timeout: 1000,
       icon: "fa-solid fa-circle-exclamation",
-      message: "点击太快了哦",
+      message: "你点太快了吧",
     });
   }
 });
 
-// 获取天气
-// 请前往 https://www.mxnzp.com/doc/list 申请 app_id 和 app_secret
-const mainKey = "c577e8a40049cf51879ff72c9dc1ae8e"; // 高德开发者 Key
-const getWeather = () => {
-  fetch(`https://restapi.amap.com/v3/ip?key=${mainKey}`)
-    .then((response) => response.json())
-    .then((res) => {
-      const adcode = res.adcode;
-      $("#city_text").html(res.city);
-      fetch(
-        `https://restapi.amap.com/v3/weather/weatherInfo?key=${mainKey}&city=${adcode}`
-      )
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.status) {
-            $("#wea_text").html(res.lives[0].weather);
-            $("#tem_text").html(res.lives[0].temperature + "°C&nbsp;");
-            $("#win_text").html(res.lives[0].winddirection + "风");
-            $("#win_speed").html(res.lives[0].windpower + "级");
-          } else {
-            console.error("天气信息获取失败");
-            iziToast.show({
-              timeout: 2000,
-              icon: "fa-solid fa-cloud-sun",
-              message: "天气信息获取失败",
-            });
-          }
-        });
+// 请前往 https://dev.qweather.com/ 申请 API 密钥
+const HEFENG_KEY = "76fa53f1ad0244489432390d8476b326";
+
+// 获取城市位置ID（需要先通过IP定位获取locationId）
+const getLocationId = () => {
+  fetch(`https://geoapi.qweather.com/v2/city/lookup?key=${HEFENG_KEY}&location=ningbo`)
+    .then(response => response.json())
+    .then(res => {
+      if (res.code === "200") {
+        const locationId = res.location[0].id;
+        $("#city_text").html(res.location[0].name);
+        getWeather(locationId);
+      }
     })
-    .catch((err) => {
-      console.error("天气信息获取失败：" + err);
-      iziToast.show({
-        timeout: 2000,
-        icon: "fa-solid fa-cloud-sun",
-        message: "天气信息获取失败",
-      });
-    });
-};
+    .catch(err => handleError("位置获取失败"));
+}
 
-getWeather();
+// 获取天气信息
+const getWeather = (locationId) => {
+  fetch(`https://devapi.qweather.com/v7/weather/now?key=${HEFENG_KEY}&location=${locationId}`)
+    .then(response => response.json())
+    .then(res => {
+      if (res.code === "200") {
+        $("#wea_text").html(res.now.text);
+        $("#tem_text").html(res.now.temp + "°C&nbsp;");
+        $("#win_text").html(res.now.windDir);
+        $("#win_speed").html(res.now.windScale + "级");
+      } else {
+        handleError("天气数据解析失败");
+      }
+    })
+    .catch(err => handleError("天气请求失败"));
+}
 
+// 错误处理统一函数
+const handleError = (msg) => {
+  console.error(msg);
+  iziToast.show({
+    timeout: 2000,
+    icon: "fa-solid fa-cloud-sun",
+    message: msg
+  });
+}
+
+// 初始化获取天气
+getLocationId();
+
+// 更新按钮逻辑保持不变
 let wea = 0;
 $("#upWeather").click(function () {
   if (wea == 0) {
     wea = 1;
     let index = setInterval(function () {
       wea--;
-      if (wea == 0) {
-        clearInterval(index);
-      }
+      if (wea == 0) clearInterval(index);
     }, 60000);
-    getWeather();
+    getLocationId();
     iziToast.show({
       timeout: 2000,
       icon: "fa-solid fa-cloud-sun",
-      message: "实时天气已更新",
+      message: "实时天气已更新"
     });
   } else {
     iziToast.show({
       timeout: 1000,
       icon: "fa-solid fa-circle-exclamation",
-      message: "请稍后再更新哦",
+      message: "请稍后再更新哦"
     });
   }
 });
@@ -359,7 +364,7 @@ $("#switchmore").on("click", function () {
   } else {
     $("#container").attr("class", "container");
     $("#change").html("Hello&nbsp;World&nbsp;!");
-    $("#change1").html("一个不正经的Up");
+    $("#change1").html("Minecraft服务器：kennyz.cn<br>TeamSpeak频道：fa1nteam.top<br>欢迎来到我的主页！服务器咨询  |  +Q: 452861927");
   }
 });
 
@@ -408,7 +413,7 @@ window.addEventListener("load", function () {
       //移动端隐藏更多页面
       $("#container").attr("class", "container");
       $("#change").html("Hello&nbsp;World&nbsp;!");
-      $("#change1").html("一个不正经的Up");
+      $("#change1").html("Minecraft服务器：kennyz.cn<br>TeamSpeak频道：fa1nteam.top<br>欢迎来到我的主页！服务器咨询  |  +Q: 452861927");
 
       //移动端隐藏弹窗页面
       $("#box").css("display", "none");
@@ -439,12 +444,54 @@ $("#more").hover(
   }
 );
 
-//屏蔽右键
-//document.oncontextmenu = function () {
-  //iziToast.show({
-    //timeout: 2000,
-    //icon: "fa-solid fa-circle-exclamation",
-    //message: "为了浏览体验，本站禁用右键",
-  //});
-  //return false;
-//};
+//控制台输出
+//console.clear();
+let styleTitle1 = `
+font-size: 20px;
+font-weight: 600;
+color: rgb(244,167,89);
+`;
+let styleTitle2 = `
+font-size:12px;
+color: rgb(244,167,89);
+`;
+let styleContent = `
+color: rgb(30,152,255);
+`;
+let title1 = "kennyZ @ Index";
+let title2 = `
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠋⠉⠁⠄⠄⠄⠄⠄⠄⠄⠄⠉⠉⠛⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⠄⣞⢯⣽⣯⣁⡀⣀⡠⣤⣶⣒⣒⣒⣢⡤⣀⣠⣤⣤⣴⣶⡏⠁⠄⠄⠄⠄⠄⠄⠙⢿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⡇⢀⣿⣙⠻⣟⣽⣾⣿⣿⣿⣿⣿⡟⣿⣿⣷⣿⣟⠟⣼⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠙⢿⣿⣿⣿⣿⣿
+⣿⣿⣿⡿⠄⠽⡷⣼⣿⢿⣿⢳⣿⢻⣿⢸⡇⢸⣿⢿⣿⣿⣆⡏⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢻⣿⣿⣿⣿
+⣿⣿⡿⠁⠄⠄⣼⣯⣿⣿⠃⢸⡏⣼⣿⡀⣧⠄⣿⡇⣿⡿⡟⣦⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢻⣿⣿⣿
+⣿⣿⠃⠄⠄⢸⣿⣿⣿⡟⢰⢹⣷⡟⣿⣧⣿⣴⣽⣿⢸⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢿⣿⣿
+⣿⡟⠄⠄⠄⡿⣿⣿⣿⡇⣿⡿⣿⣿⡛⣿⣿⢳⣿⣿⡆⢿⢹⠛⢿⡀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠸⣿⣿
+⣿⡇⠄⠄⠄⣿⢿⣯⣿⡟⣩⣩⠙⢾⣷⣿⣻⡜⡋⢉⠻⢾⣿⣼⡈⡇⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⣿
+⣿⡇⠄⠄⠄⣿⣿⣿⡿⣇⣧⠄⠄⣿⣿⣿⣿⡇⠄⢠⣳⣾⡿⣿⡀⣿⡄⠄⠄⢸⣯⡿⠉⡞⠙⣆⡿⡇⡏⠄⣿⣿
+⣿⡇⠄⠄⠄⣿⡇⣯⣧⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠃⣿⡇⢿⣇⠄⠄⠚⠈⠛⠂⠙⠛⠘⠃⠙⠃⠄⣿⣿
+⣿⣷⠄⠄⠄⣿⠇⢻⣽⡆⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠄⠄⣿⣧⢸⣿⠆⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢠⣿⣿
+⣿⣿⡄⠄⠄⣿⠄⠸⣿⣷⠄⠿⣿⣿⣿⣶⣿⣿⣿⠟⠁⠄⠄⣿⣿⠘⣿⡶⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣼⣿⣿
+⣿⣿⣷⡀⠄⠿⠄⠄⠹⣿⣷⡀⠄⣽⣟⣿⣻⣽⡆⠄⠄⠄⢸⡿⠇⠄⠸⣷⢆⠄⠄⠄⠄⠄⠄⠄⠄⠄⣰⣿⣿⣿
+⣿⣿⣿⣷⡀⠄⠄⠄⠄⠙⣿⡧⣤⠙⣿⣿⣿⣿⠁⣷⣄⡄⡾⠁⠄⠄⠄⢻⡟⡄⠄⠄⠄⠄⠄⠄⠄⣰⣿⣿⣿⣿
+⣿⣿⣿⣿⣷⣄⢀⣠⠄⠄⢲⡉⣿⡷⠈⢿⡿⠡⠾⡿⣼⣆⠄⠄⢻⣶⣦⣌⡿⡥⠄⠄⠄⠄⠄⢀⣶⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣷⠄⠄⠈⢿⣮⣃⣀⡄⠄⣀⣤⣽⣿⣿⠄⠄⠈⣿⣿⣿⣿⣮⡀⠄⠄⢀⣴⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⡀⠘⠿⠿⠿⠃⠇⠘⠛⠛⢉⢠⢠⠄⠄⢸⣿⣿⣿⣿⣿⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣤⣀⠄⠄⠄⠄⠄⢸⡌⡎⡇⠄⠄⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣷⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿        
+`;
+let content = `
+版 本 号：114.514
+更新日期：2025/02/25
+
+主页:  http://kennyz.cn:11444
+`;
+console.log(
+  `%c${title1} %c${title2}
+%c${content}`,
+  styleTitle1,
+  styleTitle2,
+  styleContent
+);

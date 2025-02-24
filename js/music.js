@@ -23,7 +23,7 @@ $.ajax({
             order: 'random',
             preload: 'auto',
             listMaxHeight: '336px',
-            volume: '0.15',
+            volume: '0.2',
             mutex: true,
             lrcType: 3,
             audio: data,
@@ -49,13 +49,13 @@ $.ajax({
                 $('.power').css("cssText", "display:none");
                 $('#lrc').css("cssText", "display:block !important");
             };
-             Notification.requestPermission().then(res => {
-                 console.log(res)
-             });
-             new Notification('音乐通知', {
-                 body: '正在播放：' + music,
-                 tag: 1
-             });
+            // Notification.requestPermission().then(res => {
+            //     console.log(res)
+            // });
+            // new Notification('音乐通知', {
+            //     body: '正在播放：' + music,
+            //     tag: 1
+            // });
         });
 
         ap.on('pause', function () {
