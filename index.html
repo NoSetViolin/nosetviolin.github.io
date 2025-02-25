@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-y/izitoast/1.4.0/css/iziToast.min.css">
     <script type="text/javascript"
         src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-y/izitoast/1.4.0/js/iziToast.min.js">
-    </script>
+        </script>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <!-- Aplayer -->
@@ -48,8 +48,6 @@
         if ( /*@cc_on!@*/ false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href =
             "/upgrade-your-browser/index.html?referrer=" + encodeURIComponent(window.location.href);
     </script>
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json">
     <!-- 51.LA 统计 -->
     <script src="./js/51LA.js"></script>
     <script type="text/javascript">
@@ -62,13 +60,13 @@
             var hours = Math.floor((diff % dayInMs) / (60 * 60 * 1000));
             var minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
             var seconds = Math.floor((diff % (60 * 1000)) / 1000);
-            
+
             // 获取 runtime_span 元素并更新内容
             document.getElementById("runtime_span").innerHTML = "本站已运行：" + days + "天" + hours + "小时" + minutes + "分" + seconds + "秒";
         }
         setInterval(runtime, 1000);
     </script>
-     <script>document.addEventListener('visibilitychange',function(){if(document.visibilityState=='hidden'){normal_title=document.title;document.title='⚡FreezeThunder⚡';}else{document.title=normal_title;}});</script>
+    <script>document.addEventListener('visibilitychange', function () { if (document.visibilityState == 'hidden') { normal_title = document.title; document.title = '⚡FreezeThunder⚡'; } else { document.title = normal_title; } });</script>
 </head>
 
 <body>
@@ -119,18 +117,17 @@
                                     <div class="des-title"><span id="change">Hello&nbsp;World&nbsp;!</span><br /><span
                                             id="change1">Minecraft服务器：kennyz.cn<br>
                                             TeamSpeak频道：fa1nteam.top<br>
-                                            欢迎来到我的主页！服务器咨询  |  +Q: 452861927</span></div>
+                                            欢迎来到我的主页！服务器咨询 | +Q: 452861927</span></div>
                                     <i class="fa-solid fa-quote-right"></i>
                                 </div>
                             </div>
                             <!--社交链接-->
                             <div class="social" id="social">
-                                <a href="https://github.com/NoSetViolin" class="link" id="github" style="margin-left: 4px"
-                                    target="_blank">
+                                <a href="https://github.com/NoSetViolin" class="link" id="github"
+                                    style="margin-left: 4px" target="_blank">
                                     <i class="fa-brands fa-github"></i>
                                 </a>
-                                <a href="https://qm.qq.com/q/zNH3nJ7c7C" class="link"
-                                    id="qq" target="_blank">
+                                <a href="https://qm.qq.com/q/zNH3nJ7c7C" class="link" id="qq" target="_blank">
                                     <i class="fa-brands fa-qq"></i>
                                 </a>
                                 <a href="mailto:nsv@kennyz.cn" class="link" id="email">
@@ -226,7 +223,7 @@
                                 <!--第一组-->
                                 <div class="row">
                                     <div class="col">
-                                        <a id="link-url-1" href="http://kennyz.cn:11444/ts.html" target="_blank">
+                                        <a id="link-url-1" href="http://kennyz.cn:11444/UnlockMusic/index.html" target="_blank">
                                             <div class="link-card cards">
                                                 <i id="link-icon-1" class="fa-solid fa-blog"></i>
                                                 <span class="link-name" id="link-name-1">音乐解锁</span>
@@ -261,7 +258,8 @@
                                         </a>
                                     </div>
                                     <div class="col 2">
-                                        <a id="link-url-5" href="steam://rungameid/730//+connect kennyz.cn:37017" target="_blank">
+                                        <a id="link-url-5" href="steam://rungameid/730//+connect kennyz.cn:37017"
+                                            target="_blank">
                                             <div class="link-card cards">
                                                 <i id="link-icon-5" class="fa-solid fa-book-bookmark"></i>
                                                 <span class="link-name" id="link-name-5">预瞄练习</span>
@@ -269,7 +267,8 @@
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a id="link-url-6" href="steam://rungameid/730//+connect kennyz.cn" target="_blank">
+                                        <a id="link-url-6" href="steam://rungameid/730//+connect kennyz.cn"
+                                            target="_blank">
                                             <div class="link-card cards">
                                                 <i id="link-icon-6" class="fa-solid fa-flask"></i>
                                                 <span class="link-name" id="link-name-6">主服竞技</span>
@@ -472,13 +471,14 @@
         <!-- 版权信息 -->
         <footer id="footer" class="fixed-bottom footer">
             <div class="power">Copyright&nbsp;©&nbsp;<span id="power-year">2020 -</span>
-                    <script>
-                        document.write((new Date()).getFullYear());
-                    </script>
-                    <a href="https://space.bilibili.com/1252667569" id="power-text">kennyZ | FreezeThunder</a>&nbsp;&nbsp;<span id="runtime_span"></span>
-                </span>
-            <!-- 歌词显示 -->
-            <div id="lrc"></div>
+                <script>
+                    document.write((new Date()).getFullYear());
+                </script>
+                <a href="https://space.bilibili.com/1252667569" id="power-text">kennyZ |
+                    FreezeThunder</a>&nbsp;&nbsp;<span id="runtime_span"></span>
+                </div>
+                <!-- 歌词显示 -->
+                <div id="lrc"></div>
         </footer>
     </section>
     <!-- sw.js -->
@@ -500,7 +500,7 @@
     <script type="text/javascript" src="./js/js.cookie.js"></script>
     <script type="text/javascript"
         src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-y/bootstrap/5.1.0/js/bootstrap.min.js">
-    </script>
+        </script>
 </body>
 
 </html>

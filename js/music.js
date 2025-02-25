@@ -14,13 +14,14 @@ let type = "playlist"; //song: 单曲; playlist: 歌单; album: 唱片
 let id = "4756780495"; //封面 ID / 单曲 ID / 歌单 ID
 
 $.ajax({
-    url: "https://api.injahow.cn/meting/?server=" + server + "&type=" + type + "&id=" + id,
+    url: "http://kennyz.cn:11446/?server=" + server + "&type=" + type + "&id=" + id,
     type: "GET",
     dataType: "JSON",
     success: function (data) {
         const ap = new APlayer({
             container: document.getElementById('aplayer'),
-            order: 'random',
+            order: 'list',
+            autoplay: 'true',
             preload: 'auto',
             listMaxHeight: '336px',
             volume: '0.2',
@@ -49,13 +50,13 @@ $.ajax({
                 $('.power').css("cssText", "display:none");
                 $('#lrc').css("cssText", "display:block !important");
             };
-            // Notification.requestPermission().then(res => {
-            //     console.log(res)
-            // });
-            // new Notification('音乐通知', {
-            //     body: '正在播放：' + music,
-            //     tag: 1
-            // });
+            Notification.requestPermission().then(res => {
+                console.log(res)
+            });
+            new Notification('音乐通知', {
+                body: '正在播放：' + music,
+                tag: 1
+            });
         });
 
         ap.on('pause', function () {
